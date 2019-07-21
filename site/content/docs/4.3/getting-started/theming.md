@@ -195,7 +195,7 @@ Additional functions could be added in the future or your own custom Sass to cre
 
 ### Color contrast
 
-One additional function we include in Bootstrap is the color contrast function, `color-yiq`. It utilizes the [YIQ color space](https://en.wikipedia.org/wiki/YIQ) to automatically return a light (`#fff`) or dark (`#111`) contrast color based on the specified base color. This function is especially useful for mixins or loops where you're generating multiple classes.
+An additional function we include in Bootstrap is the color contrast function, `color-yiq`. It utilizes the [YIQ color space](https://en.wikipedia.org/wiki/YIQ) to automatically return a light (`#fff`) or dark (`#111`) contrast color based on the specified base color. This function is especially useful for mixins or loops where you're generating multiple classes.
 
 For example, to generate color swatches from our `$theme-colors` map:
 
@@ -222,6 +222,10 @@ You can also specify a base color with our color map functions:
   color: color-yiq(theme-color("dark")); // returns `color: #fff`
 }
 {{< /highlight >}}
+
+## Escape SVG
+
+We use the `escape-svg` function to escape the `<`, `>` and `#` characters for SVG background images. These characters need to be escaped to properly render the background images in IE.
 
 ## Sass options
 
@@ -283,7 +287,7 @@ In the future, we'll aim to provide Sass maps and variables for shades of each c
 
 ### Theme colors
 
-We use a subset of all colors to create a smaller color palette for generating color schemes, also available as Sass variables and a Sass map in Bootstraps's `scss/_variables.scss` file.
+We use a subset of all colors to create a smaller color palette for generating color schemes, also available as Sass variables and a Sass map in Bootstrap's `scss/_variables.scss` file.
 
 <div class="row">
   {{< theme-colors.inline >}}
@@ -404,11 +408,6 @@ Here are the variables we include (note that the `:root` is required). They're l
   --danger: #dc3545;
   --light: #f8f9fa;
   --dark: #343a40;
-  --breakpoint-xs: 0;
-  --breakpoint-sm: 576px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 992px;
-  --breakpoint-xl: 1200px;
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
@@ -424,27 +423,5 @@ body {
 }
 a {
   color: var(--blue);
-}
-{{< /highlight >}}
-
-### Breakpoint variables
-
-While we originally included breakpoints in our CSS variables (e.g., `--breakpoint-md`), **these are not supported in media queries**, but they can still be used _within_ rulesets in media queries. These breakpoint variables remain in the compiled CSS for backward compatibility given they can be utilized by JavaScript. [Learn more in the spec](https://www.w3.org/TR/css-variables-1/#using-variables).
-
-Here's an example of **what's not supported:**
-
-{{< highlight css >}}
-@media (min-width: var(--breakpoint-sm)) {
-  ...
-}
-{{< /highlight >}}
-
-And here's an example of **what is supported:**
-
-{{< highlight css >}}
-@media (min-width: 768px) {
-  .custom-element {
-    color: var(--primary);
-  }
 }
 {{< /highlight >}}
