@@ -100,3 +100,19 @@
 
   @return mix($color-base, $color, $level * $theme-color-interval);
 }
+
+// @function color-level($color-name: "blue", $level: 0) {
+//   $color: map-get($colors, $color-name);
+//   $color-base: if($level > 0, $black, $white);
+//   $level: abs($level);
+//
+//   @return mix($color-base, $color, $level * $theme-color-interval);
+// }
+
+@function tint-color($color, $level) {
+  @return mix(black, $color, $level * $theme-color-interval);
+}
+
+@function shade-color($color, $level) {
+  @return mix(white, $color, $level * $theme-color-interval);
+}
